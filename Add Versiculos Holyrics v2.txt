@@ -1,0 +1,48 @@
+function scriptAction(obj) {
+    
+// COPIE APENAS VERSÍCULOS
+// obtém os versículos da área de transferência
+    var clip = h.getClipboard();
+           
+// separa cada versículo em uma linha
+    var linha = clip.split('\n').filter(linha => linha.trim() !== "");;            
+    
+//transforma cada linha em um item de versículo
+    var verse = linha.map(linha =>{
+        return{
+                type: 'verse',
+                references: linha,
+            };
+        });
+          
+// adiciona os versículos à Lista de Reprodução de Mídia      
+    var verses = h.hly('AddToPlaylist', {
+    items: verse,
+    // por padrão os versículos são adicionados no fim da playlist. Altere o valor de "index" abaixo para escolher a posição começando de "0"
+    index:0         
+});
+
+// cria o título "Versículos" que incluirá todos os versículos adicionados
+if (verses.status == 'ok'){
+   var s = h.hly('AddToPlaylist', {
+    items: [
+        {
+            type: 'title',
+            name: 'Versículos',
+            background_color: '#48ffff',
+            collapsed: false
+        }
+    ],                 
+    index:0
+}); 
+}
+
+// informa se a área de transferência está vazia ou sem versículos  
+if (clip === "") {
+    h.log("Área de transferência vazia");
+} else if (verses.status != 'ok') {
+    h.log("Área de transferência inválida\n(" + clip + ")");
+} else {
+    h.log(clip + "\nVersículos adicionados com sucesso")
+}
+}
