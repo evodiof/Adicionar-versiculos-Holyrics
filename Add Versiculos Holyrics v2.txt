@@ -1,6 +1,8 @@
 function scriptAction(obj) {
     
 // COPIE APENAS VERSÍCULOS
+// Os versículos de livros que possuem o mesmo nome (ex. 1 Samuel e 2 Samuel) devem estar com o numeral ao ser copiado. O uso de "I" ou "II", interrompe a adição dos versículos à playlist.
+
 // obtém os versículos da área de transferência
     var clip = h.getClipboard();
            
@@ -45,4 +47,5 @@ if (clip === "") {
 } else {
     h.log(clip + "\nVersículos adicionados com sucesso")
 }
+
 }
