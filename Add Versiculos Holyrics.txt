@@ -31,6 +31,3 @@ if (val === "") {
     h.log(val + "\nVersículos adicionados com sucesso")
 }
 }
-
-
-
